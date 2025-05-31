@@ -9,11 +9,11 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
 
-const foodRoutes = require('./routes/foodItems');
 const authRoutes = require('./routes/auth');
+const menuRoutes = require('./routes/menu');
 
-app.use('/api/foods', foodRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/menu', menuRoutes);
 
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,

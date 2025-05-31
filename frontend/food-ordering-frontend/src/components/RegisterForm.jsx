@@ -31,6 +31,12 @@ function RegisterForm() {
         <input name="username" placeholder="Username" onChange={handleChange} required /><br />
         <input name="email" type="email" placeholder="Email" onChange={handleChange} required /><br />
         <input name="password" type="password" placeholder="Password" onChange={handleChange} required /><br />
+        <select name="role" onChange={handleChange} required>
+          <option value="">Select Role</option>
+          <option value="vendor">Vendor</option>
+          <option value="student">Student</option>
+        </select>
+        <br />
         <button type="submit">Register</button>
       </form>
       <p>{message}</p>
