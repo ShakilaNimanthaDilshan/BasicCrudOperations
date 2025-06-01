@@ -14,7 +14,7 @@ router.get('/', authMiddleware, async (req, res) => {
 });
 
 // Get all menus - public for students
-router.get('/menu/all', async (req, res) => {
+router.get('/all', async (req, res) => {
   try {
     const menuItems = await Menu.find().populate('vendorId', 'username email');
     res.json(menuItems);

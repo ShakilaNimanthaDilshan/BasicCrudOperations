@@ -11,9 +11,11 @@ const PORT = process.env.PORT || 5000;
 
 const authRoutes = require('./routes/auth');
 const menuRoutes = require('./routes/menu');
+const orderRoutes = require('./routes/order');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/menu', menuRoutes);
+app.use('/api/orders', orderRoutes);
 
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,

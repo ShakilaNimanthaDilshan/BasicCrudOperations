@@ -74,14 +74,22 @@ function VendorDashboard() {
         <ul>
           {menu.map(item => (
             <li key={item._id}>
-              <strong>{item.name}</strong> - ${item.price}<br />
+              <strong>{item.name}</strong> - Rs.{item.price}<br />
               {item.description}
             </li>
           ))}
         </ul>
       )}
 
-      <Link to="/dashboard/vendor/menu">Manage Menu</Link>
+      {/* Navigation Links */}
+      <div style={{ marginTop: '20px' }}>
+        <Link to="/dashboard/vendor/menu" style={{ marginRight: '15px' }}>
+          Manage Menu
+        </Link>
+        <Link to="/dashboard/vendor/orders">
+          View Orders
+        </Link>
+      </div>
     </div>
   );
 }

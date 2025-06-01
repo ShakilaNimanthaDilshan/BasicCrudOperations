@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 function MenuManager() {
   const [menu, setMenu] = useState([]);
@@ -8,11 +8,7 @@ function MenuManager() {
 
   const token = localStorage.getItem('token');
 
-  useEffect(() => {
-    fetchMenu();
-  }, []);
-
-  const fetchMenu = async () => {
+  const fetchMenu = useCallback(async () => {
     const res = await fetch('http://localhost:5000/api/menu', {
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -20,7 +16,11 @@ function MenuManager() {
       const data = await res.json();
       setMenu(data);
     }
-  };
+  }, [token]);
+
+  useEffect(() => {
+    fetchMenu();
+  }, [fetchMenu]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -102,19 +102,33 @@ function MenuManager() {
           required
         /><br />
         <button type="submit">{editId ? 'Update' : 'Add'} Item</button>
-        {editId && <button onClick={() => { setEditId(null); setForm({ name: '', description: '', price: '' }); }}>Cancel</button>}
+        {editId && (
+          <button
+            type="button"
+            onClick={() => {
+              setEditId(null);
+              setForm({ name: '', description: '', price: '' });
+              setError('');
+            }}
+          >
+            Cancel
+          </button>
+        )}
       </form>
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
       <h3>Your Menu Items</h3>
       <ul>
-        {menu.map(item => (
+        {menu.map((item) => (
           <li key={item._id}>
-            <strong>{item.name}</strong> - ${item.price.toFixed(2)}
+            <strong>{item.name}</strong> - Rs.{item.price.toFixed(2)}
             <br />
-            <small>{item.description}</small><br />
+            <small>{item.description}</small>
+            <br />
             <button onClick={() => handleEdit(item)}>Edit</button>
-            <button onClick={() => handleDelete(item._id)} style={{ marginLeft: '10px' }}>Delete</button>
+            <button onClick={() => handleDelete(item._id)} style={{ marginLeft: '10px' }}>
+              Delete
+            </button>
           </li>
         ))}
       </ul>

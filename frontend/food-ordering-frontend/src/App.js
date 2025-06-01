@@ -5,6 +5,7 @@ import LoginForm from './components/LoginForm';
 import VendorDashboard from './components/VendorDashboard';
 import StudentDashboard from './components/StudentDashboard';
 import MenuManager from './components/MenuManager';
+import VendorOrders from './components/VendorOrders'; // ✅ Import the new component
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/dashboard/vendor" element={<VendorDashboard />} />
         <Route path="/dashboard/student" element={<StudentDashboard />} />
         <Route path="/dashboard/vendor/menu" element={<MenuManager />} />
+        <Route path="/dashboard/vendor/orders" element={<VendorOrders />} /> {/* ✅ New route */}
       </Routes>
     </Router>
   );
